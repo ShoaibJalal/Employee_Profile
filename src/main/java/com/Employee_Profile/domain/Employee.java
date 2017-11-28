@@ -1,7 +1,15 @@
 package com.Employee_Profile.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Employee {
-	
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	private String name;
 	private int age;
 	private String socialSecurityNumber;
@@ -15,6 +23,16 @@ public class Employee {
 		this.age = age;
 		this.socialSecurityNumber = socialSecurityNumber;
 		this.salary = salary;
+	}
+	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -48,11 +66,13 @@ public class Employee {
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", age=" + age + ", socialSecurityNumber=" + socialSecurityNumber
-				+ ", salary=" + salary + "]";
+		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", socialSecurityNumber="
+				+ socialSecurityNumber + ", salary=" + salary + "]";
 	}
 	
 	
