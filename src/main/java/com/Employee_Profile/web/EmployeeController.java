@@ -30,11 +30,17 @@ public class EmployeeController {
     public String save(Employee employee){
         erepository.save(employee);
         return "redirect:employeelist";
-    }    
+    }
+    
+    @RequestMapping(value = "/edit/{id}")
+    public String editEmployee(@PathVariable("id") Long employeeId,Model model){
+    	model.addAttribute("employee", erepository.findOne(employeeId));
+        return "editemployee";
+    }     
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteEmployee(@PathVariable("id") Long employeeId, Model model) {
     	erepository.delete(employeeId);
-        return "redirect:./employeelist";
+        return "redirect:../employeelist";
     }     
 }
