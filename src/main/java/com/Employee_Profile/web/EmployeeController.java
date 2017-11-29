@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.Employee_Profile.domain.*;
 
@@ -19,6 +20,12 @@ public class EmployeeController {
 	
 	@Autowired
 	private DepartmentRepository drepository;
+	
+	//ask for login to show employees
+	@RequestMapping(value="/login")
+	public String login() {	
+	    return "login";
+	} 
 	
 	// Will show all employees
 	@RequestMapping(value="/employeelist")
@@ -40,6 +47,7 @@ public class EmployeeController {
 } 
 	
 	//Will add new employee
+	@PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/add")
     public String addEmployee(Model model){
     	model.addAttribute("employee", new Employee());
