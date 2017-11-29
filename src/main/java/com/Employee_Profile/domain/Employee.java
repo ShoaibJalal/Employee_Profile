@@ -1,19 +1,32 @@
 package com.Employee_Profile.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.Employee_Profile.domain.Department;
 
 @Entity
 public class Employee {
+	
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private Long id;
 	private String name;
 	private int age;
 	private String socialSecurityNumber;
 	private double salary;
+	
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "departmentid")
+	private Department department;
 	
 	public Employee(){}
 	
@@ -26,6 +39,15 @@ public class Employee {
 	}
 	
 	
+
+	public Employee(String name, int age, String socialSecurityNumber, double salary, Department department) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.socialSecurityNumber = socialSecurityNumber;
+		this.salary = salary;
+		this.department = department;
+	}
 
 	public Long getId() {
 		return id;
@@ -68,11 +90,25 @@ public class Employee {
 	}
 	
 	
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", socialSecurityNumber="
-				+ socialSecurityNumber + ", salary=" + salary + "]";
+		if(this.department != null)
+			return "Employee [name=" + name + ", age=" + age + ", socialSecurityNumber="
+				+ socialSecurityNumber + ", salary=" + salary + ", department=" + this.getDepartment() + "]";
+		else
+			return "Employee [name=" + name + ", age=" + age + ", socialSecurityNumber="
+			+ socialSecurityNumber + ", salary=" + salary + "]";
+			
 	}
 	
 	

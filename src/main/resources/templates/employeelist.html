@@ -3,25 +3,34 @@
 <head>
     <title>EmployeeList</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
+	<div class="container">
 	<h1>Employees</h1>
-    <table>
+    <table class = "table table-striped">
+    	<thead>
 		<tr>
 		    <th>Name</th>
 		    <th>Age</th>
 		    <th>Social Security Number</th>
 		    <th>Salary</th>
-		</tr>  
+		    <th>Department</th>
+		</tr>
+		</thead>
+		<tbody>  
     	<tr th:each = "employee : ${employees}">
     		<td th:text="${employee.name}"></td>
     		<td th:text="${employee.age}"></td>
     		<td th:text="${employee.socialSecurityNumber}"></td>
     		<td th:text="${employee.salary}"></td>
- 			<td><a th:href="@{/delete/{id}(id=${employee.id})}">Delete</a></td>
- 			<td><a th:href="@{/edit/{id}(id=${employee.id})}">Edit</a></td>    		
+    		<td th:text="${employee.department.name}"></td>
+ 			<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${employee.id})}">Delete</a></td>
+ 			<td><a class="btn btn-primary" th:href="@{./edit/{id}(id=${employee.id})}">Edit</a></td>    		
     	</tr>
+    	</tbody>
      </table>
-	 <a href="/add">Add Employee</a>    	
+	 <a class="btn btn-success" href="/add">Add Employee</a>  
+	 </div>  	
 </body>
 </html>
