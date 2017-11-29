@@ -48,7 +48,7 @@ public class EmployeeController {
 	
 	//Will add new employee
 	@PreAuthorize("hasAuthority('ADMIN')")
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/addemployee")
     public String addEmployee(Model model){
     	model.addAttribute("employee", new Employee());
     	model.addAttribute("departments", drepository.findAll());
